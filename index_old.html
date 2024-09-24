@@ -1,0 +1,117 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./resources/style.css" media="screen"/>
+
+<html lang="en">
+<head>
+	<title>The Ingredients for Robotic Diffusion Transformers</title>
+    <!-- <link rel="icon" type="image/x-icon" href="./resources/icon.png"> -->
+    <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/
+        if you update and want to force Facebook to re-scrape. -->
+	<meta property="og:title" content="The Ingredients for Robotic Diffusion Transformers" />
+	<meta property="og:description" content="We show how simple changes can dramatically improve diffusion transformers." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+
+<body>
+<div class="container">
+    <div class="title">
+        The Ingredients for Robotic Diffusion Transformers
+    </div>
+
+    <br>
+    <br>
+
+    <div class="author">
+        <a href="https://sudeepdasari.github.io/">Sudeep Dasari</a><sup>1</sup>
+    </div>
+    <div class="author">
+        <a href="https://www.oiermees.com">Oier Mees</a><sup>2</sup>
+    </div>
+    <div class="author">
+        <a href="http://linkedin.com/in/sebbyzhao">Sebastian Zhao</a><sup>2</sup>
+    </div>
+    <div class="author">
+        <a href="https://www.mohansrirama.com">Mohan Kumar Srirama</a><sup>1</sup>
+    </div>
+    <div class="author">
+        <a href="https://people.eecs.berkeley.edu/~svlevine/">Sergey Levine</a><sup>2</sup>
+    </div>
+    <br>
+    <br>
+
+    <div class="affiliation"><sup>1&nbsp;</sup>Carnegie Mellon University</div>
+    <div class="affiliation"><sup>2&nbsp;</sup>UC Berkeley</div>
+
+    <br>
+    <br>
+
+    <div class="links"><a href="resources/paper.pdf">[Paper]</a></div>
+    <div class="links"><a href="https://github.com/SudeepDasari/data4robotics/tree/dit_release">[Code]</a></div>
+    <div class="links"><a href="https://console.cloud.google.com/storage/browser/aloha_play_dataset_public;tab=objects?forceOnBucketsSortingFiltering=true&authuser=2&project=rail-tpus&prefix=&forceOnObjectsSortingFiltering=false">[Dataset]</a></div>
+    <br>
+    <br>
+    
+    <div class="teaser-left preview">
+        <a href="resources/teaser.m4v" target="_blank">
+            <video autoplay loop muted playsinline width="80%">
+                <source src="resources/teaser.mp4" type="video/mp4">
+            </video>
+        </a>
+        <br>
+    </div>
+
+    <br><br>
+    <hr>
+
+    <h1>Overview</h1>
+    <p > 
+        This paper identifies, studies, and improves key architectural design decisions for high-capacity diffusion transformer policies. Our model, named DiT-Block Policy, makes a few simple, yet impactful, changes to the <a href="https://diffusion-policy.cs.columbia.edu">vanilla diffusion transformer recipe</a>. Namely, we add <a href="https://www.wpeebles.com/DiT">adaLN-zero layers</a> to the transformer blocks and further optimize the input encoding layers. The resulting architecture significantly outperforms the state of the art in solving long-horizon ($1500+$ time-steps) dexterous tasks on a bi-manual ALOHA robot, without the excruciating pain of per-setup hyper-parameter tuning. Finally, we find that our policies show improved scaling performance when trained on 10 hours of highly multi-modal, language annotated ALOHA demonstration data, which we've open-sourced for the community's benefit.
+    </p>
+
+
+    <br><br><hr>
+
+    <h1>Paper</h1>
+
+    <div class="paper-thumbnail">
+        <a href="./resources/paper.pdf">
+            <img class="layered-paper-big" width="100%" src="./resources/paper.jpg" alt="Paper thumbnail."/>
+        </a>
+    </div>
+    <div class="paper-info">
+        <h4>The Ingredients for Robotic Diffusion Transformers<br>
+            <!-- <i>Presented in ICRA 2023 </i><br> <br> -->
+            Sudeep Dasari, Oier Mees, Sebastian Zhao, Mohan Kumar Srirama, Sergey Levine <br>
+        </h4>
+        <pre><code>@inproceedings{dasari2024ditpi,
+            title={The Ingredients for Robotic Diffusion Transformers},
+            author = {Mohan Kumar Srirama and Sudeep Dasari and Shikhar Bahl and Abhinav Gupta},
+            booktitle = {arXiv e-prints},
+            year={2024},
+        }
+}</code></pre>
+    </div>
+
+    <br><br><hr>
+
+    <h1>Acknowledgements</h1>
+    <p>
+        This work was supported by grants ...
+        Furthermore, Sudeep Dasari's PhD was supported by NDSEG.
+        In addition, we'd like to recognize thoughtful feedback from 
+        Katie Kang, Homer Walke, Dibya Ghosh, Oleg Rybkin, and Pranav
+        Atreya that greatly improved this paper. 
+        <a href="https://github.com/jasonyzhang/webpage-template">Website Template.</a> 
+    </p>
+
+    <br><br>
+</div>
+
+</body>
+
+</html>
