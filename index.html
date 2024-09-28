@@ -12,10 +12,10 @@
   </script>
   <meta charset="utf-8">
   <meta name="description"
-        content="Scaling Cross-Embodied Learning: One Policy for Manipulation, Navigation, Locomotion and Aviation">
-  <meta name="keywords" content="Imitation Learning, Cross-Embodiment">
+        content="The Ingredients for Robotic Diffusion Transformers">
+  <meta name="keywords" content="Imitation Learning, Diffusion Policy">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CrossFormer</title>
+  <title>DiT-Policy</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -47,9 +47,7 @@
             <br>
             <span style="font-size:2.1rem; font-weight:6">The Ingredients for Robotic Diffusion Transformers</span>
           </h1>
-          <!-- <h1 class="title is-1 publication-title">
-            CrossFormer: Scaling Cross-Embodied Learning for Manipulation, Navigation, Locomotion, and Aviation
-          </h1> -->
+          
           <div class="is-size-5 publication-authors">
 
             <span class="author-block">
@@ -59,10 +57,10 @@
               <a style="font-weight: 500;" href="https://www.oiermees.com/" target="_blank">Oier Mees</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a style="font-weight: 500;" href="https://www.oiermees.com/" target="_blank">Sebastian Zhao</a><sup>2</sup>,
+              <a style="font-weight: 500;" href="http://linkedin.com/in/sebbyzhao/" target="_blank">Sebastian Zhao</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a style="font-weight: 500;" href="https://www.oiermees.com/" target="_blank">Mohan Kumar Srirama</a><sup>1</sup>,
+              <a style="font-weight: 500;" href="https://scholar.google.com/citations?user=Yu18Q6MAAAAJ&hl=en/" target="_blank">Mohan Kumar Srirama</a><sup>1</sup>,
             </span>
             <span class="author-block">
               <a style="font-weight: 500;" href="https://people.eecs.berkeley.edu/~svlevine/" target="_blank">Sergey Levine</a><sup>2</sup>
@@ -70,14 +68,12 @@
           <!-- <div class="column"> -->
             <br>
             <span class="author-block"><sup><font size="-0.4"><font size="-0.4">1 </sup>Carnegie Mellon University</font>, <sup><font size="-0.4">2 </sup>UC Berkeley</font></span>
-            <br><br>
-
-            <br> <br>   
+             
             <!-- <br><br> --> 
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block" >
-                <a href="https://arxiv.org/abs/2408.11812"
+                <a href="./resources/paper.pdf"
                    target="_blank"
                    class="external-link button is-normal is-rounded is-dark" >
                   <span class="icon" style="color:#f5f3f3">
@@ -87,7 +83,7 @@
                 </a>
               </span> 
               <span class="link-block">
-                <a href="https://github.com/rail-berkeley/crossformer"
+                <a href="https://github.com/SudeepDasari/data4robotics/tree/dit_release"
                    target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span style="color:#f5f3f3" class="icon">
@@ -97,13 +93,13 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://huggingface.co/rail-berkeley/crossformer"
+                <a href="https://console.cloud.google.com/storage/browser/aloha_play_dataset_public;tab=objects?forceOnBucketsSortingFiltering=true&authuser=2&project=rail-tpus&prefix=&forceOnObjectsSortingFiltering=false"
                    target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span style="color:#f5f3f3" class="icon">
-                    <i class="fas fa-weight-hanging"></i>
+                    <i class="fas fa-database"></i>
                   </span>
-                  <span style="color:#f5f3f3">Model</span>
+                  <span style="color:#f5f3f3">Dataset</span>
                 </a>
               </span>
             </div>
@@ -125,7 +121,7 @@
             </video>
             <br><br>
             <h2 class="subtitle has-text-centered scroll-element" >
-                CrossFormer is the first robot policy to achieve state-of-the-art performance across six embodiments of distinct action spaces without <i>any</i> action space alignment.
+                Our method allows for stable training of high-capacity Diffusion Transformer Policies.
             </h2>
         <!-- </div> -->
     </div>
@@ -138,20 +134,12 @@
     <!-- <div class="columns is-centered has-text-centered"> -->
       <!-- <div class="column is-four-fifths"> -->
         <br>
-        <h2 class="title is-3 scroll-element">Abstract</h2>
+        <h2 class="title is-3 scroll-element">Overview</h2>
         <div class="content has-text-justified scroll-element">
           <p>
-            Modern machine learning systems rely on large datasets to attain broad generalization, and this often poses a challenge in robot learning, where each robotic platform and task might have only a small dataset. 
-            By training a single policy across many different kinds of robots, a robot learning method can leverage much broader and more diverse datasets, which in turn can lead to better generalization and robustness.
-            However, training a single policy on multi-robot data is challenging because robots can have widely varying sensors, actuators, and control frequencies. 
+            This paper identifies, studies, and improves key architectural design decisions for high-capacity diffusion transformer policies. Our model, named DiT-Block Policy, makes a few simple, yet impactful, changes to the <a href="https://diffusion-policy.cs.columbia.edu">vanilla diffusion transformer recipe</a>. Namely, we add <a href="https://www.wpeebles.com/DiT">adaLN-zero layers</a> to the transformer blocks and further optimize the input encoding layers. The resulting architecture significantly outperforms the state of the art in solving long-horizon (1500+ time-steps) dexterous tasks on a bi-manual ALOHA robot, without the excruciating pain of per-setup hyper-parameter tuning. Finally, we find that our policies show improved scaling performance when trained on 10 hours of highly multi-modal, language annotated ALOHA demonstration data, which we've open-sourced for the community's benefit.
           </p>
-          <p>
-            We propose <b>CrossFormer</b>, a scalable and flexible transformer-based policy that can consume data from any embodiment. 
-            We train CrossFormer on the largest and most diverse dataset to date, 900K trajectories across 30 different robot embodiments. 
-            We demonstrate that the same network weights can control vastly different robots, including single and dual arm manipulation systems, wheeled robots, quadcopters, and quadrupeds. 
-            Unlike prior work, our model does not require manual alignment of the observation or action spaces. 
-            Extensive experiments in the real world show that our method matches the performance of specialist policies tailored for each embodiment, while also significantly outperforming the prior state of the art in cross-embodiment learning.
-          </p>
+          
         </div>
       <!-- </div> -->
     <!-- </div> -->
@@ -170,16 +158,17 @@
         <!-- <div class="hero-body"> -->
           <img id="teaser" src="./static/images/aloha_diffusion_arch.png" alt="CrossFormer teaser image."/>
           <br>
-          <p style="text-align:center"> CrossFormer Architecture.</p>
+          <p style="text-align:center"> DiT-Block Policy Architecture.</p>
         <br>
         <!-- </div> -->
         <div class="content has-text-justified scroll-element">
           <p>
-            Our method, CrossFormer, casts the cross-embodied imitation learning problem as a sequence-to-sequence problem. 
-            We choose a transformer-based policy to handle the variable length inputs and outputs. Observations, proprioception, and 
-            a task specification are tokenized by modality-specific tokenizers. These are assembled into a token sequence, and fed into 
-            a decoder-only transformer backbone that is shared across <i>all</i> embodiments. The output embeddings of this transformer are 
-            then fed into separate action heads for each class of embodiments to produce actions of the corresponding dimension. 
+            Our method -- DiT-Block Policy -- is a Transformer neural network architecture designed specifically to be a highly performant conditional noise network for robotic diffusion policies. 
+            The DiT-Block Policy architecture is visualized above. First, the text goal and robot proprioception inputs are encoded into observation vectors. 
+            Similarly, the time-step (k) is turned into an embedding vector using sinusoidal Fourier Features and a small MLP network. 
+            Then, all these embedding vectors are combined with the input noise vector using an encoder-decoder Transformer architecture to produce the denoising output.
+            We make <i>two simple, yet critical, additions</i> that significantly boost performance: <b>(1)</b> we replace standard cross-attention layers with <a href="https://www.wpeebles.com/DiT">adaLN-zero layers</a> in the transformer decoder; 
+            and <b>(2)</b> we parameterize the image encoders with separate ResNet-18 networks per camera input. Both of these changes significantly boost training stability and final performance.
           </p>
 
         </div>
@@ -201,17 +190,18 @@
           <img id="teaser" src="./static/images/aloha_dataset.png" alt="CrossFormer teaser image." style="width: 65%;"/>
           </div>
           <br>
-          <p style="text-align:center"> CrossFormer Architecture.</p>
+          <p style="text-align:center"> BiPlay Dataset</p>
         <br>
         <!-- </div> -->
         <div class="content has-text-justified scroll-element">
           <p>
-            Our method, CrossFormer, casts the cross-embodied imitation learning problem as a sequence-to-sequence problem.
-            We choose a transformer-based policy to handle the variable length inputs and outputs. Observations, proprioception, and
-            a task specification are tokenized by modality-specific tokenizers. These are assembled into a token sequence, and fed into
-            a decoder-only transformer backbone that is shared across <i>all</i> embodiments. The output embeddings of this transformer are
-            then fed into separate action heads for each class of embodiments to produce actions of the corresponding dimension.
-          </p>
+            Inspired by prior work on data scaling<a href="https://robotics-transformer-x.github.io">[1</a>,<a href="https://rail-berkeley.github.io/bridgedata/">2</a>,<a href="https://droid-dataset.github.io">3]</a>, 
+            we seek to understand how Dit-Block Policies will behave as they are trained on increasingly diverse demonstrations data. 
+            However, the few (open-source) bi-manual datasets that do exist<a href="https://tonyzhaozh.github.io/aloha/">[4</a>,<a href="https://yay-robot.github.io">5]</a>, only consist of a handful of tasks, collected using the same controlled scenes/objects. 
+            As a result, they are not useful for testing generalization in our bi-manual setting. To address this shortcoming, we collected and annotated BiPlay, a more diverse bi-manual manipulation dataset with randomized objects and background settings. 
+            We collected BiPlay as a series of 3.5 minute long episodes. For each episode, we constructed a random scene with various objects, and solved a sequence of tasks within that scene. 
+            After collection, the episodes were broken into clips that were in turn annotated with appropriate language task descriptions. 
+            The final dataset contains 7023 clips spanning 10 Hrs of robot data collection.
 
         </div>
       <!-- </div> -->
@@ -237,191 +227,11 @@
         <h2 class="title is-3 scroll-element">Results</h2>
         <!-- <div class="hero-body"> -->
           <br>
-          <img class="scroll-element" id="teaser" src="./static/images/graph.png" alt="CrossFormer Results"/>
-          <p style="text-align:center">We compare CrossFormer to the same architecture trained on just the target embodiment data (single-robot baseline) as well as the best prior method. Overall, CrossFormer performs better than or comparably to the state of the art. </p>
+          <img class="scroll-element" id="teaser" src="./resources/chart.jpg" alt="CrossFormer Results"/>
         <!-- </div> -->
          <br>
-        <p class = "scroll-element">
-          Below, we provide evaluation videos for each of our four distinct action modes: 
-          Single-Arm Manipulation, Bimanual Manipulation, Navigation, and Locomotion. 
-          Here, the state-of-the-art method refers to the best prior method or the single-robot baseline, whichever has a higher success rate.
-        </p>
-        <br><br>
         
-        <!-- Single Arm Manipulation. -->
-        <h3 class="title is-4 scroll-element">Single-Arm Manipulation</h3>
-        <div class="content has-text-justified scroll-element">
-          <!-- <p>
-            On the Franka, we evaluate on a sweeping task, in which the robot's goal is to grasp the grey brush and sweep
-            the acorns into the dustpan. A rollout's score is based on the number of acorns (out of three) that are completely
-            within the dustpan at the end of 250 timesteps. Videos are played in <b> 3x </b> speed.
-          </p> -->
-          <p> 
-            <!-- <b>Task Description:</b>  -->
-            On the Franka, we evaluate on a sweeping task, in which the robot's goal is to grasp the grey brush and sweep the acorns into the dustpan.
-            On the WidowX, we evaluate on two different pick and place tasks: put the mushroom in the silver pot and place the spoon on the blue towel. 
-
-            <br><br>
-
-            <b>Matches State-of-the-Art Performance? ✅︎ </b> 
-            <br>
-            We show that it is possible to co-train a policy on a variety of diverse embodiments, not just limited to single-arm manipulators, while maintaining performance achieved by <a target="_blank" href="https://arxiv.org/abs/2405.12213">prior work</a> trained only on single-arm-data. 
-          </p>
         </div>
-        <br>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-full-width has-text-centered">
-            <video class="scroll-element" id="manip_vid" autoplay controls muted loop playsinline height="100%" width="100%" controls loop>
-              <source src="./static/videos/crossformer/manip.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <br/>
-        <!--/ Single Arm Manipulation. -->
-        
-        <!-- Bimanual Manipulation -->
-        <h3 class="title is-4 scroll-element">Bimanual Manipulation</h3>
-        <div class="content has-text-justified scroll-element">
-          <!-- <p>
-            On the ALOHA bimanual embodiment, the robot's goal is to uncap the pen. A rollout is given a score of 1 if the pen is
-            successfully uncapped at the end of 300 timesteps, and 0 otherwise. Video is played in <b> 1x </b> speed.
-          </p> -->
-          <p> 
-            <!-- <b>Task Description:</b>  -->
-            The robot's goal is to uncap the orange Sharpie pen. 
-
-            <br><br>
-
-            <b>Matches State-of-the-Art Performance? ✅︎ </b> 
-            <br>
-            CrossFormer is first work to show successful performance of a cross-embodiment policy on a bimanual robot. 
-            The bimanual embodiment is challenging due to various specifications, including longer-horizon action chunking and a higher control frequency (50hz). 
-            Our method's flexibility allows us to meet such robot-specific constraints without adversely impacting performance on other embodiments. 
-          </p>
-        </div>
-        <br>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-full-width has-text-centered">
-            <video class = "scroll-element" id="bimanual_vid" autoplay controls muted loop playsinline height="100%" width="100%" controls loop>
-              <source src="./static/videos/crossformer/bimanual_both.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <br/>
-
-        <!-- Bimanual Manipulation -->
-
-        <!-- Navigation -->
-        <h3 class="title is-4 scroll-element">Navigation</h3>
-        <div class="content has-text-justified scroll-element">
-          <!-- <p>
-            For ground and aerial navigation, a rollout's score is defined by its distance from the goal node in the topological map.
-            Videos are played in <b> 2x </b> speed.
-          </p> -->
-          <p> 
-            <!-- <b>Task Description:</b>  -->
-            Given a topological map of goals, the navigation robot should follow the path to the goal while avoiding any collisions. 
-  
-            <br><br>
-  
-            <b>Matches State-of-the-Art Performance? ✅︎ </b> 
-            <br>
-            Without any action-space alignment, our policy is capable of navigating trajectories both indoors and outdoors, as well as on out-of-distribution paths. 
-            In addition, we show strong performance on more complex navigation tasks, such as obstacle avoidance, sharp turns, and corner-turning (see the section <a href=#baseline_comp>below</a>). 
-  
-          </p>
-          
-        </div>
-        <br>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-full-width has-text-centered">
-            <video class = "scroll-element" id="nav_vid" autoplay controls muted loop playsinline height="100%" width="100%" controls loop>
-              <source src="./static/videos/crossformer/nav_vid.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <br/>
-        <!--/ Navigation. -->
-
-        <!-- Locomotion -->
-        <h3 class="title is-4 scroll-element">Locomotion</h3>
-        <div class="content has-text-justified scroll-element">
-          <!-- <p>
-            The simulated robot dog should learn to walk forward. Video is played in <b> 2x </b> speed.
-          </p> -->
-          <p> 
-            <!-- <b>Task Description:</b>  -->
-            The quadrupedal robot must learn to successfully walk forward.
-  
-            <br><br>
-  
-            <b>Matches State-of-the-Art Performance? ✅︎ </b> 
-            <br>
-            Our policy is the <i>first</i> to successfully train a cross-embodiment policy that successfully controls manipulators, navigators, and low-level motion of quadrupeds. 
-            The most related cross-embodiment <a target="_blank" href="https://arxiv.org/abs/2402.19432">prior work</a> controls quadrupeds using high-level, 2D waypoints. 
-            CrossFormer can not only control such navigators with 2D waypoints, but is also capable of handling the low-level, 12-dimensional actions needed to entirely control a quadrupedal robot.
-  
-          </p>
-        </div>
-        <br>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-full-width has-text-centered">
-            <video class = "scroll-element" id="locomotion_vid" autoplay controls muted loop playsinline height="100%" width="100%" controls loop>
-              <source src="./static/videos/crossformer/locomotion.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <br/>
-        <!--/ Locomotion. -->
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-    
-<!-- <section class="section scroll-element" id="baseline_comp"> -->
-  <div class="container is-max-desktop">
-        <h2 class="title scroll-element">Comparison to Best Prior Cross-Embodiment Work</h2>
-        <p>
-          In this section, we compare video rollouts of our policy to <a target="_blank" href="https://arxiv.org/abs/2402.19432">Yang et. al.</a>,
-          who train a single policy across manipulation and navigation by aligning the observation and action spaces. Though this work is the first to 
-          demonstrate positive transfer from navigation to manipulation, we find that observation and action-space alignment sometimes hinders performance on complex navigation and third-person single-arm manipulation tasks. Qualitatively, our navigation policies are smoother with less stop & go movement.
-        </p>
-        <div class="hero-body scroll-element" style="text-align:center">
-          <br>
-          <img style="max-width:75%" id="teaser" src="./static/images/baseline.png" alt="Baseline Comparison"/>
-          <p style="text-align:center">CrossFormer forgoes action alignment and achieves an average of <b>3x</b> higher success rates on complex navigation and manipulation tasks. </p>
-        </div>
-        <br>
-
-        <div class ="scroll-element">
-          <div style = "background-color:#ffffff;"class="columns is-vcentered interpolation-panel" style="display: flex; justify-content: space-between;">
-            <div style=" width: 32%; margin-right: 2%; text-align: center;">
-              <video id="obs1_vid" autoplay controls muted loop playsinline style="width: 100%;">
-                <source src="./static/videos/crossformer/obsavoid1.mp4" type="video/mp4">
-              </video>
-              <p style="margin-top: 10px;">Obstacle Avoidance</p>
-            </div>
-            
-            <div style="width: 32%; margin-right: 2%; text-align: center;">
-              <video id="obs2_vid" autoplay controls muted loop playsinline style="width: 100%;">
-                <source src="./static/videos/crossformer/turn_corner1.mp4" type="video/mp4">
-              </video>
-              <p style="margin-top: 10px;">Turn Corner</p>
-            </div>
-            
-            <div style="width: 32%; text-align: center;">
-              <video id="sharpturn_vid" autoplay controls muted loop playsinline style="width: 100%;">
-                <source src="./static/videos/crossformer/sharpturns1.mp4" type="video/mp4">
-              </video>
-              <p style="margin-top: 10px;">Sharp Turns</p>
-            </div>
-        </div>
-        </div>
-        <br/>
 
       </div>
     </div> 
@@ -433,12 +243,12 @@
 <!-- <section class="section scroll-element" id="BibTeX"> -->
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code> @article{Doshi24-crossformer,
-      title={Scaling Cross-Embodied Learning: One Policy for Manipulation, Navigation, Locomotion and Aviation},
-      author={Ria Doshi and Homer Walke and Oier Mees and Sudeep Dasari and Sergey Levine},
-      journal={arXiv preprint arXiv:2408.11812},
-      year={2024}
-  }</code></pre>
+    <pre><code> @inproceedings{dasari2024ditpi,
+        title={The Ingredients for Robotic Diffusion Transformers},
+        author = {Mohan Kumar Srirama and Sudeep Dasari and Shikhar Bahl and Abhinav Gupta},
+        booktitle = {arXiv e-prints},
+        year={2024},
+    }</code></pre>
   </div>
 
 <!-- </section> -->
